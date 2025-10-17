@@ -1,9 +1,10 @@
+import React from 'react'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [active, setActive] = useState('home')
 
   return (
     <nav className="navbar">
@@ -26,32 +27,32 @@ function NavBar() {
 
         <ul className={isOpen ? 'nav-links open' : 'nav-links'}>
           <li>
-            <a 
-              href="#home" 
-              className={active === 'home' ? 'nav-link active' : 'nav-link'}
-              onClick={() => setActive('home')}
-            >Home</a>
+            <NavLink 
+              to="/"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={() => setIsOpen(false)}
+            >Home</NavLink>
           </li>
           <li>
-            <a 
-              href="#about" 
-              className={active === 'about' ? 'nav-link active' : 'nav-link'}
-              onClick={() => setActive('about')}
-            >About</a>
+            <NavLink 
+              to="/about"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={() => setIsOpen(false)}
+            >About</NavLink>
           </li>
           <li>
-            <a 
-              href="#services" 
-              className={active === 'services' ? 'nav-link active' : 'nav-link'}
-              onClick={() => setActive('services')}
-            >Services</a>
+            <NavLink 
+              to="/services"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={() => setIsOpen(false)}
+            >Services</NavLink>
           </li>
           <li>
-            <a 
-              href="#contacts" 
-              className={active === 'contacts' ? 'nav-link active' : 'nav-link'}
-              onClick={() => setActive('contacts')}
-            >Contacts</a>
+            <NavLink 
+              to="/contact"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={() => setIsOpen(false)}
+            >Contacts</NavLink>
           </li>
         </ul>
       </div>

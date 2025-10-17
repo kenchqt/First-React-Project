@@ -1,60 +1,45 @@
 import React from 'react'
-import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import { FaHome, FaUser, FaThLarge, FaEnvelope, FaMicrochip } from 'react-icons/fa'
 
 function NavBar() {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <div className="nav-brand">
-          <AutoAwesomeIcon className="brand-icon" />
-          <span className="brand-name">Kench</span>
+    <nav className="dock" aria-label="Primary">
+      <div className="dock-container">
+        <div className="nav-brand" style={{ marginRight: '0.5rem', display: 'none' }}>
+          <FaMicrochip className="brand-icon" />
         </div>
-
-        <button
-          className="nav-toggle"
-          aria-label="Toggle navigation"
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen(!isOpen)}
+        <NavLink
+          to="/"
+          className={({ isActive }) => isActive ? 'dock-item active' : 'dock-item'}
         >
-          <span className="bar" />
-          <span className="bar" />
-          <span className="bar" />
-        </button>
+          <span className="dock-icon"><FaHome /></span>
+          <span className="dock-label">Home</span>
+        </NavLink>
 
-        <ul className={isOpen ? 'nav-links open' : 'nav-links'}>
-          <li>
-            <NavLink 
-              to="/"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              onClick={() => setIsOpen(false)}
-            >Home</NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/about"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              onClick={() => setIsOpen(false)}
-            >About</NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/services"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              onClick={() => setIsOpen(false)}
-            >Services</NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/contact"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              onClick={() => setIsOpen(false)}
-            >Contacts</NavLink>
-          </li>
-        </ul>
+        <NavLink
+          to="/about"
+          className={({ isActive }) => isActive ? 'dock-item active' : 'dock-item'}
+        >
+          <span className="dock-icon"><FaUser /></span>
+          <span className="dock-label">About</span>
+        </NavLink>
+
+        <NavLink
+          to="/services"
+          className={({ isActive }) => isActive ? 'dock-item active' : 'dock-item'}
+        >
+          <span className="dock-icon"><FaThLarge /></span>
+          <span className="dock-label">Services</span>
+        </NavLink>
+
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => isActive ? 'dock-item active' : 'dock-item'}
+        >
+          <span className="dock-icon"><FaEnvelope /></span>
+          <span className="dock-label">Contact</span>
+        </NavLink>
       </div>
     </nav>
   )

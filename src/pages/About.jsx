@@ -18,7 +18,7 @@ function About() {
   // Type the command first, then reveal remaining lines
   useEffect(() => {
     let cancelled = false
-    const cmd = '> cat kench_profile.txt'
+    const cmd = '> cat Kench_Profile.txt'
     setLines([])
     setTypedCmd('')
     let idx = 0
@@ -30,7 +30,6 @@ function About() {
         setTimeout(step, 70)
       } else {
         setCmdDone(true)
-        // ensure the view starts at the top so the first printed line (Name) is visible
         const el = termRef.current
         if (el) { el.scrollTop = 0 }
         setLockTop(true)
@@ -71,6 +70,7 @@ function About() {
   return (
     <section className="page about">
       <div className="container">
+        <h1>Kench_Profile.txt</h1>
         <div className="flex flex-col md:flex-row items-center gap-4">
           <div className="flex-shrink-0 flex justify-center md:justify-start w-full md:w-auto">
             <motion.div

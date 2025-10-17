@@ -45,8 +45,6 @@ function Home() {
     return () => clearTimeout(timeout)
   }, [charIndex, deleting, msgIndex])
 
-  // Cursor trail removed for a cleaner look
-
   // Simple draggable windows
   function Draggable({ title, children }) {
     const ref = useRef(null)

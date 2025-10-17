@@ -31,8 +31,6 @@ function Contact() {
     setTimeout(() => { setSending(false); setMessage('') }, 800)
   }
 
-  // Removed typing animation on Contact
-
   return (
     <section className="page contact">
       <div className="container">

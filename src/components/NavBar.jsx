@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaHome, FaUser, FaThLarge, FaEnvelope, FaMicrochip } from 'react-icons/fa'
+import { FaHome, FaUser, FaThLarge, FaEnvelope, FaMicrochip, FaCode } from 'react-icons/fa'
 
 function NavBar() {
   // Navigation dock
@@ -34,6 +34,14 @@ function NavBar() {
         >
           <span className="dock-icon"><FaThLarge /></span>
           <span className="dock-label">Services</span>
+        </NavLink>
+
+        <NavLink
+          to="/stack"
+          className={({ isActive }) => isActive ? 'dock-item active' : 'dock-item'}
+        >
+          <span className="dock-icon"><FaCode /></span>
+          <span className="dock-label">Stack</span>
         </NavLink>
 
         <NavLink

@@ -49,7 +49,20 @@ function Contact() {
     <section className="page contact">
       {/* Contact form */}
       <div className="container">
-        <h1 className="reveal">Contact</h1>
+        <motion.h1 
+          className="reveal text-center mb-8" 
+          initial={{ opacity: 0, y: 6 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.3 }}
+        >
+          <span className="relative inline-block mx-auto">
+            <span className="text-transparent bg-clip-text text-3xl font-bold" style={{ backgroundImage: 'linear-gradient(90deg, rgba(0,255,255,0.9), rgba(102,178,255,0.9))' }}>
+              Contact
+            </span>
+            <span className="block h-[3px] mt-2 rounded-full" style={{ background: 'linear-gradient(90deg, rgba(0,255,255,0.6), rgba(102,178,255,0.6))' }} />
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-sm -z-10"></div>
+          </span>
+        </motion.h1>
         <div className="card mini-card reveal reveal-1" style={{ padding: '1rem' }}>
           <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', color: '#cfcfcf' }}>
             Let's collaborate. Type your message below.

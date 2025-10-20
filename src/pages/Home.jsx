@@ -80,8 +80,8 @@ function Home() {
           <Card title="Contact">
             <p>Best ways to reach me.</p>
           </Card>
-          <Card title="Playground">
-            <p>Small UI/UX experiments.</p>
+          <Card title="Stack">
+            <p>My tech stack and skills.</p>
           </Card>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Home() {
-  // Typing animation for hero subtitle
+  // Typing animation
   const [typedText, setTypedText] = useState('')
   const messages = [
     'Welcome to KenchOS',
@@ -45,24 +46,10 @@ function Home() {
     return () => clearTimeout(timeout)
   }, [charIndex, deleting, msgIndex])
 
-  // Simple draggable windows
-  function Draggable({ title, children }) {
-    const ref = useRef(null)
-    useEffect(() => {
-      const el = ref.current
-      if (!el) return
-      let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0
-      const header = el.querySelector('.window-title')
-      const down = (e) => { dragging = true; sx = e.clientX; sy = e.clientY; const r = el.getBoundingClientRect(); ox = r.left; oy = r.top }
-      const move = (e) => { if (!dragging) return; const dx = e.clientX - sx; const dy = e.clientY - sy; el.style.transform = `translate(${ox+dx}px, ${oy+dy}px)` }
-      const up = () => { dragging = false }
-      header.addEventListener('mousedown', down)
-      window.addEventListener('mousemove', move)
-      window.addEventListener('mouseup', up)
-      return () => { header.removeEventListener('mousedown', down); window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up) }
-    }, [])
+  // Simple cards
+  function Card({ title, children }) {
     return (
-      <div className="window" ref={ref}>
+      <div className="window card-simple">
         <div className="window-title">{title}</div>
         <div className="window-body">{children}</div>
       </div>
@@ -71,28 +58,31 @@ function Home() {
 
   return (
     <section className="page home">
+      {/* Hero section */}
       <div className="container hero">
         <h1 className="hero-title fade-in">KenchOS — A Developer’s Interface</h1>
         <p className="hero-subtitle fade-in-delayed" aria-live="polite">
           {typedText}<span className="caret">|</span>
         </p>
+        {/* Action buttons */}
         <div className="hero-cta fade-in-delayed-2">
-          <a className="btn primary" href="/about">About me</a>
-          <a className="btn" href="/contact">Say hello</a>
+          <Link className="btn primary" to="/about">About me</Link>
+          <Link className="btn" to="/contact">Say hello</Link>
         </div>
+        {/* Simple cards */}
         <div className="windows">
-          <Draggable title="About">
+          <Card title="About">
             <p>Who I am and what I use.</p>
-          </Draggable>
-          <Draggable title="Services">
-            <p>Tools and stacks I’m learning.</p>
-          </Draggable>
-          <Draggable title="Contact">
+          </Card>
+          <Card title="Services">
+            <p>Tools and stacks I'm learning.</p>
+          </Card>
+          <Card title="Contact">
             <p>Best ways to reach me.</p>
-          </Draggable>
-          <Draggable title="Playground">
+          </Card>
+          <Card title="Playground">
             <p>Small UI/UX experiments.</p>
-          </Draggable>
+          </Card>
         </div>
       </div>
     </section>

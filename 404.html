@@ -13,9 +13,20 @@
     <meta property="og:image" content="/images/image.png" />
     <meta property="og:url" content="/" />
     <title>KenchOS</title>
+    <script>
+      // Redirect to index for SPA routes preserving path for client router
+      (function() {
+        var loc = window.location;
+        if (loc.pathname !== '/' && !loc.pathname.startsWith('/index.html')) {
+          loc.replace('/');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-</html>
+  </html>
+
+

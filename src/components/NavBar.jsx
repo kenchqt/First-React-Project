@@ -3,12 +3,15 @@ import { NavLink } from 'react-router-dom'
 import { FaHome, FaUser, FaThLarge, FaEnvelope, FaMicrochip } from 'react-icons/fa'
 
 function NavBar() {
+  // Navigation dock
   return (
     <nav className="dock" aria-label="Primary">
       <div className="dock-container">
+        {/* Brand logo */}
         <div className="nav-brand" style={{ marginRight: '0.5rem', display: 'none' }}>
           <FaMicrochip className="brand-icon" />
         </div>
+        {/* Nav links */}
         <NavLink
           to="/"
           className={({ isActive }) => isActive ? 'dock-item active' : 'dock-item'}

@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { FaReact, FaCss3Alt, FaHtml5, FaLaravel, FaPhp, FaJava } from 'react-icons/fa'
 
 function About() {
+  // Terminal animation
   const [lines, setLines] = useState([])
   const [typedCmd, setTypedCmd] = useState('')
   const [cmdDone, setCmdDone] = useState(false)
   const [lockTop, setLockTop] = useState(true)
+  const [selected, setSelected] = useState(null)
   const termRef = useRef(null)
   const profile = [
     ' ',
@@ -15,7 +18,7 @@ function About() {
     'Skills: React, JavaScript, CSS, HTML, Java, PHP, Laravel',
   ]
 
-  // Type the command first, then reveal remaining lines
+  // Type the command first, then reveal the lines
   useEffect(() => {
     let cancelled = false
     const cmd = '> cat Kench_Profile.txt'
@@ -33,17 +36,15 @@ function About() {
         const el = termRef.current
         if (el) { el.scrollTop = 0 }
         setLockTop(true)
-        // after command is fully typed, print lines sequentially
+        // after typing, print lines
         let i = 0
         const addNext = () => {
           if (cancelled || i >= profile.length) return
           setLines(prev => {
             const next = [...prev, profile[i]]
-            // keep view anchored to top for first line
             const el2 = termRef.current
             if (el2 && next.length === 1) el2.scrollTop = 0
             if (next.length === 1) {
-              // release scroll after first line rendered
               setTimeout(() => setLockTop(false), 150)
             }
             return next
@@ -58,7 +59,6 @@ function About() {
     return () => { cancelled = true }
   }, [])
 
-  // While lockTop is true, keep scroll pinned to top
   useEffect(() => {
     if (!lockTop) return
     const el = termRef.current
@@ -69,6 +69,7 @@ function About() {
 
   return (
     <section className="page about">
+      {/* Profile section */}
       <div className="container">
         <h1>Kench_Profile.txt</h1>
         <div className="flex flex-col md:flex-row items-center gap-4">
@@ -107,6 +108,55 @@ function About() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Tech stacks */}
+        <div className="mt-8">
+          <motion.h2 className="reveal text-center mb-6" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+            <span className="relative inline-block mx-auto">
+              <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(90deg, rgba(0,255,255,0.85), rgba(102,178,255,0.85))' }}>Tech Stacks</span>
+              <span className="block h-[2px] mt-1 rounded-full" style={{ background: 'linear-gradient(90deg, rgba(0,255,255,0.5), rgba(102,178,255,0.5))' }} />
+            </span>
+          </motion.h2>
+          <div className="card-row three-cols">
+            {[
+              { title: 'React.js', icon: <FaReact />, desc: 'Frontend framework for interactive web pages.' },
+              { title: 'CSS', icon: <FaCss3Alt />, desc: 'Minimal designs and styles.' },
+              { title: 'HTML', icon: <FaHtml5 />, desc: 'Simple structure and markups.' },
+              { title: 'Laravel', icon: <FaLaravel />, desc: 'PHP framework for building backend.' },
+              { title: 'PHP', icon: <FaPhp />, desc: 'Basic CRUD operations.' },
+              { title: 'Java', icon: <FaJava />, desc: 'Java and OOP fundamentals.' },
+            ].map((t, i) => (
+              <div key={t.title} className={`card flip reveal reveal-${(i % 4) + 1}`} onClick={() => setSelected(t)}>
+                <div className="flip-inner">
+                  <div className="flip-face">
+                    <div className="flip-icon text-3xl">{t.icon}</div>
+                  </div>
+                  <div className="flip-face flip-back">
+                    <h3 className="text-center">{t.title}</h3>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Stack modal */}
+          {selected && (
+            <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label={`${selected.title} details`} onClick={() => setSelected(null)}>
+              <div className="modal-window" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-titlebar">
+                  <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className="flip-icon">{selected.icon}</span>
+                    {selected.title}
+                  </strong>
+                  <button className="modal-close" onClick={() => setSelected(null)}>Close</button>
+                </div>
+                <div className="modal-body">
+                  <p style={{ marginTop: 0 }}>{selected.desc}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

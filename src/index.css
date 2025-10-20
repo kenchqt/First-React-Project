@@ -37,7 +37,7 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #1E1E2E;
+  background: #000000;
   color: var(--text-primary);
 }
 
